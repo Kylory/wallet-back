@@ -8,6 +8,7 @@ const current = async (req, res) => {
     Status: '200 OK',
     'Content-Type': 'application/json',
     ResponseBody: {
+      email: user.name,
       email: user.email,
     },
   })

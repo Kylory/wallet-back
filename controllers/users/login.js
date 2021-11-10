@@ -38,6 +38,7 @@ const login = async (req, res) => {
     ResponseBody: {
       token: result.token,
       user: {
+        name: result.user.name,
         email: result.user.email,
       },
     },
