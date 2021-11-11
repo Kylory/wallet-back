@@ -1,12 +1,8 @@
-const { Schema, model } = require("mongoose");
+const { Schema, model, SchemaTypes } = require("mongoose");
 // const mongoosePaginate = require('mongoose-paginate-v2')
 
-const transactionSchema = new mongoose.Schema(
+const transactionSchema = new Schema(
   {
-    owner: {
-      type: Schema.Types.ObjectId,
-      ref: "User",
-    },
     date: {
       type: Date,
       required: true,
@@ -37,25 +33,25 @@ const transactionSchema = new mongoose.Schema(
       type: Number,
       required: [true, "Укажите сумму транзакции"],
     },
+    owner: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+    },
     // balance: {
     //   type: Number,
     //   required: true,
     // },
   },
-  { timestamps: true }
+  { versionKey: false, timestamps: true }
 );
-
-const joiSchema = Joi.object({
-  date: Joi.date().required(),
-  type: Joi.string().required(),
-  category: Joi.string().required(),
-  comment: Joi.string(),
-  amount: Joi.number().required(),
-  // balance: Joi.number().required(),
-});
-
-// contactSchema.plugin(mongoosePaginate)
 
 const Transaction = model("Transaction", transactionSchema);
 
-module.exports = { Transaction, joiSchema };
+// const type =
+// const add = type.plus
+
+// const User.methods.sum = () => {
+//   return `${this.balance}${add}${this.tra}`
+// }
+
+module.exports = { Transaction };
