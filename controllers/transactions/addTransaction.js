@@ -1,5 +1,4 @@
 const Joi = require("joi");
-const { getUserByToken } = require("../../model/users");
 const { createTransaction } = require("../../model/transactions");
 
 const joiSchema = Joi.object({
