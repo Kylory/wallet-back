@@ -27,7 +27,6 @@
         "tags": ["Users"],
         "summary": "User registration",
         "parameters": [],
-        "security": [{ "Bearer": [] }],
         "requestBody": {
           "description": "Registration's object",
           "required": true,
@@ -45,7 +44,95 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/RegistrationResponse"
+                  "$ref": "#/components/schemas/RegistrationResponse201"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RegistrationResponse400"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Email in use",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RegistrationResponse409"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/users/login": {
+      "post": {
+        "tags": ["Users"],
+        "summary": "User login",
+        "parameters": [],
+        "requestBody": {
+          "description": "Login object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LoginResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {}
+          },
+          "401": {
+            "description": "Email or password is wrong",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/api/users/logot": {
+      "post": {
+        "tags": ["Users"],
+        "summary": "User logout",
+        "parameters": [],
+        "security": [{ "Bearer": [] }],
+        "requestBody": {
+          "description": "Logout object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LogoutRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LogoutResponse"
                 }
               }
             }
@@ -62,6 +149,7 @@
       }
     }
   },
+
   "components": {
     "schemas": {
       "RegistrationRequest": {
@@ -90,8 +178,8 @@
           }
         }
       },
-      "RegistrationResponse": {
-        "type": "array",
+      "RegistrationResponse201": {
+        "type": "object",
         "items": {
           "type": "object",
           "properties": {
@@ -100,17 +188,97 @@
               "description": "User's email",
               "format": "email"
             },
-            "userId": {
-              "type": "number",
-              "description": "User's id",
-              "example": "32143232436545474"
+            "name": {
+              "type": "string",
+              "description": "User's name",
+              "example": "Elon Musk"
             }
           }
         },
-        "example": [
-          { "email": "1@gmail.com", "userId": "1" },
-          { "email": "2@gmail.com", "userId": "2" }
-        ]
+        "example": {
+          "Status": "201 Created",
+          "Content-Type": "application/json",
+          "ResponseBody": {
+            "user": {
+              "name": "Elon Musk",
+              "email": "user@example.com"
+            }
+          }
+        }
+      },
+      "RegistrationResponse400": {
+        "type": "object",
+        "items": {
+          "type": "object",
+          "properties": {
+            "ResponseBody": "Validation error"
+          }
+        },
+        "example": {
+          "Status": "400 Bad Request",
+          "Content-Type": "application/json",
+          "ResponseBody": "Validation error"
+        }
+      },
+      "RegistrationResponse409": {
+        "type": "object",
+        "items": {
+          "type": "object",
+          "properties": {
+            "ResponseBody": "Email in use"
+          }
+        },
+        "example": {
+          "Status": "409 Conflic",
+          "Content-Type": "application/json",
+          "ResponseBody": "Email in use"
+        }
+      },
+
+      "LoginRequest": {
+        "type": "object",
+        "required": ["email", "password", "repeated_password", "name"],
+        "properties": {
+          "email": {
+            "type": "string",
+            "description": "User's email",
+            "format": "email"
+          },
+          "password": {
+            "type": "string",
+            "description": "User's password",
+            "example": "qwerty123"
+          }
+        }
+      },
+      "LoginResponse": {
+        "type": "object",
+        "items": {
+          "type": "object",
+          "properties": {
+            "email": {
+              "type": "string",
+              "description": "User's email",
+              "format": "email"
+            },
+            "name": {
+              "type": "string",
+              "description": "User's name",
+              "example": "Elon Musk"
+            }
+          }
+        },
+        "example": {
+          "Status": "200 OK",
+          "Content-Type": "application/json",
+          "ResponseBody": {
+            "token": "token",
+            "user": {
+              "name": "Elon Musk",
+              "email": "user@example.com"
+            }
+          }
+        }
       }
     },
     "securitySchemes": {
