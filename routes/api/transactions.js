@@ -3,7 +3,7 @@ const router = express.Router();
 const { controllerWrapper, authMiddleware } = require("../../middlewares");
 const {
   getAllTransactions,
-  //   getById,
+  getCategories,
   addTransaction,
   //   updateById,
   //   removeById,
@@ -16,7 +16,7 @@ const {
 
 router.get("/", authMiddleware, controllerWrapper(getAllTransactions));
 
-// router.get('/:contactId', controllerWrapper(getById))
+router.get("/categories", authMiddleware, controllerWrapper(getCategories));
 
 router.post("/", authMiddleware, controllerWrapper(addTransaction));
 
