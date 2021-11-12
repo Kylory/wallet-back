@@ -1,4 +1,4 @@
-const { Schema, model, SchemaTypes } = require("mongoose");
+const { Schema, model } = require("mongoose");
 // const mongoosePaginate = require('mongoose-paginate-v2')
 
 const transactionSchema = new Schema(
@@ -37,21 +37,10 @@ const transactionSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: "User",
     },
-    // balance: {
-    //   type: Number,
-    //   required: true,
-    // },
   },
   { versionKey: false, timestamps: true }
 );
 
 const Transaction = model("Transaction", transactionSchema);
-
-// const type =
-// const add = type.plus
-
-// const User.methods.sum = () => {
-//   return `${this.balance}${add}${this.tra}`
-// }
 
 module.exports = { Transaction };
