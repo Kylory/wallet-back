@@ -54,13 +54,23 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/RegistrationResponse400"
+                  "$ref": "#/components/schemas/Response400"
+                }
+              }
+            }
+          },
+          "400 ": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RegistrationResponse400 "
                 }
               }
             }
           },
           "409": {
-            "description": "Email in use",
+            "description": "Conflic",
             "content": {
               "application/json": {
                 "schema": {
@@ -89,22 +99,35 @@
           }
         },
         "responses": {
-          "200": {
+          "201": {
+            "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/LoginResponse"
+                  "$ref": "#/components/schemas/LoginResponse201"
                 }
               }
             }
           },
           "400": {
             "description": "Bad request",
-            "content": {}
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response400"
+                }
+              }
+            }
           },
           "401": {
             "description": "Email or password is wrong",
-            "content": {}
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LoginResponse401"
+                }
+              }
+            }
           }
         }
       }
@@ -115,35 +138,56 @@
         "summary": "User logout",
         "parameters": [],
         "security": [{ "Bearer": [] }],
-        "requestBody": {
-          "description": "Logout object",
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/LogoutRequest"
-              }
-            }
-          }
-        },
         "responses": {
-          "201": {
-            "description": "Created",
+          "204": {
+            "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/LogoutResponse"
+                  "$ref": "#/components/schemas/LogoutResponse204"
                 }
               }
             }
           },
-          "400": {
-            "description": "Bad request",
-            "content": {}
+          "401": {
+            "description": "Not authorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthResponse401"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/users/current": {
+      "get": {
+        "tags": ["Users"],
+        "summary": "User`s current data",
+        "parameters": [],
+        "security": [{ "Bearer": [] }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CurrentResponse200"
+                }
+              }
+            }
           },
-          "409": {
-            "description": "Email in use",
-            "content": {}
+          "401": {
+            "description": "Not authorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthResponse401"
+                }
+              }
+            }
           }
         }
       }
@@ -199,6 +243,7 @@
           "Status": "201 Created",
           "Content-Type": "application/json",
           "ResponseBody": {
+            "message": "New user created",
             "user": {
               "name": "Elon Musk",
               "email": "user@example.com"
@@ -206,18 +251,40 @@
           }
         }
       },
-      "RegistrationResponse400": {
+      "Response400": {
         "type": "object",
         "items": {
           "type": "object",
           "properties": {
-            "ResponseBody": "Validation error"
+            "ResponseBody": {
+              "message": "Validation error"
+            }
           }
         },
         "example": {
           "Status": "400 Bad Request",
           "Content-Type": "application/json",
-          "ResponseBody": "Validation error"
+          "ResponseBody": {
+            "message": "Validation error"
+          }
+        }
+      },
+      "RegistrationResponse400 ": {
+        "type": "object",
+        "items": {
+          "type": "object",
+          "properties": {
+            "ResponseBody": {
+              "message": "Entered passwords do not match"
+            }
+          }
+        },
+        "example": {
+          "Status": "400 Bad Request",
+          "Content-Type": "application/json",
+          "ResponseBody": {
+            "message": "Entered passwords do not match"
+          }
         }
       },
       "RegistrationResponse409": {
@@ -225,24 +292,29 @@
         "items": {
           "type": "object",
           "properties": {
-            "ResponseBody": "Email in use"
+            "ResponseBody": {
+              "message": "Email in use"
+            }
           }
         },
         "example": {
           "Status": "409 Conflic",
           "Content-Type": "application/json",
-          "ResponseBody": "Email in use"
+          "ResponseBody": {
+            "message": "Email in use"
+          }
         }
       },
 
       "LoginRequest": {
         "type": "object",
-        "required": ["email", "password", "repeated_password", "name"],
+        "required": ["email", "password"],
         "properties": {
           "email": {
             "type": "string",
             "description": "User's email",
-            "format": "email"
+            "format": "email",
+            "example": "user@example.com"
           },
           "password": {
             "type": "string",
@@ -251,7 +323,81 @@
           }
         }
       },
-      "LoginResponse": {
+      "LoginResponse201": {
+        "type": "object",
+        "items": {
+          "type": "object",
+          "properties": {
+            "token": {
+              "type": "string",
+              "description": "User's token"
+            },
+            "email": {
+              "type": "string",
+              "description": "User's email",
+              "format": "email"
+            },
+            "name": {
+              "type": "string",
+              "description": "User's name",
+              "example": "Elon Musk"
+            }
+          }
+        },
+        "example": {
+          "Status": "201 OK",
+          "Content-Type": "application/json",
+          "ResponseBody": {
+            "token": "token",
+            "user": {
+              "name": "Elon Musk",
+              "email": "user@example.com"
+            }
+          }
+        }
+      },
+      "LoginResponse401": {
+        "type": "object",
+        "items": {
+          "type": "object",
+          "properties": {
+            "ResponseBody": {
+              "message": "Email or password is wrong"
+            }
+          }
+        },
+        "example": {
+          "Status": "401 Unauthorized",
+          "Content-Type": "application/json",
+          "ResponseBody": {
+            "message": "Email or password is wrong"
+          }
+        }
+      },
+      "LogoutResponse204": {
+        "example": {
+          "Status": "204 OK"
+        }
+      },
+      "AuthResponse401": {
+        "type": "object",
+        "items": {
+          "type": "object",
+          "properties": {
+            "ResponseBody": {
+              "message": "Not authorized"
+            }
+          }
+        },
+        "example": {
+          "Status": "401 Unauthorized",
+          "Content-Type": "application/json",
+          "ResponseBody": {
+            "message": "Not authorized"
+          }
+        }
+      },
+      "CurrentResponse200": {
         "type": "object",
         "items": {
           "type": "object",
@@ -272,7 +418,6 @@
           "Status": "200 OK",
           "Content-Type": "application/json",
           "ResponseBody": {
-            "token": "token",
             "user": {
               "name": "Elon Musk",
               "email": "user@example.com"
