@@ -16,7 +16,9 @@ const signup = async (req, res) => {
     res.status(400).json({
       Status: '400 Bad Request',
       'Content-Type': 'application/json',
-      ResponseBody: 'Validation error',
+      ResponseBody: {
+        message: 'Validation error',
+      },
     })
     return
   }
@@ -25,7 +27,9 @@ const signup = async (req, res) => {
     res.status(400).json({
       Status: '400 Bad Request',
       'Content-Type': 'application/json',
-      ResponseBody: 'Entered passwords do not match',
+      ResponseBody: {
+        message: 'Entered passwords do not match',
+      },
     })
     return
   }
@@ -57,6 +61,7 @@ const signup = async (req, res) => {
     'Content-Type': 'application/json',
     ResponseBody: {
       // message: 'Verification link has been sent to you email',
+      message: 'New user created',
       user: {
         name: result.name,
         email: result.email,

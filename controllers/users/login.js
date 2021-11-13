@@ -13,7 +13,9 @@ const login = async (req, res) => {
     res.status(400).json({
       Status: '400 Bad Request',
       'Content-Type': 'application/json',
-      ResponseBody: 'Validation error',
+      ResponseBody: {
+        message: 'Validation error',
+      },
     })
     return
   }
@@ -33,7 +35,7 @@ const login = async (req, res) => {
   }
 
   res.status(201).json({
-    Status: '200 OK',
+    Status: '201 OK',
     'Content-Type': 'application/json',
     ResponseBody: {
       token: result.token,
