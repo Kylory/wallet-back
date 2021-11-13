@@ -18,6 +18,10 @@ const userSchema = new mongoose.Schema({
     type: String,
     default: null,
   },
+  balance: {
+    type: Number,
+    default: 0,
+  },
   // verify: {
   //   type: Boolean,
   //   default: false,

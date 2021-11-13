@@ -402,15 +402,19 @@
         "items": {
           "type": "object",
           "properties": {
+            "name": {
+              "type": "string",
+              "description": "User's name",
+              "example": "Elon Musk"
+            },
             "email": {
               "type": "string",
               "description": "User's email",
               "format": "email"
             },
-            "name": {
-              "type": "string",
-              "description": "User's name",
-              "example": "Elon Musk"
+            "balance": {
+              "type": "integr",
+              "description": "User's balance"
             }
           }
         },
@@ -420,7 +424,8 @@
           "ResponseBody": {
             "user": {
               "name": "Elon Musk",
-              "email": "user@example.com"
+              "email": "user@example.com",
+              "balance": 100000
             }
           }
         }
