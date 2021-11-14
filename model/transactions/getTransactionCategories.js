@@ -8,6 +8,10 @@ const getTransactionCategories = async () => {
     { home: "Дом" },
     { education: "Образование" },
     { other: "Остальные" },
+    {
+      increment: "Доход",
+    },
+    { decrement: "Расход" },
   ];
 };
 

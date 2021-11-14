@@ -4,25 +4,25 @@ const { Schema, model } = require("mongoose");
 const transactionSchema = new Schema(
   {
     date: {
-      type: Date,
+      type: Number,
       required: true,
     },
     type: {
       type: String,
       required: [true, "Выберите тип транзакции"],
-      enum: ["Доход", "Расход"],
+      enum: ["increment", "decrement"],
     },
     category: {
       type: String,
       enum: [
-        "Основной",
-        "Еда",
-        "Авто",
-        "Развитие",
-        "Дети",
-        "Дом",
-        "Образование",
-        "Остальные",
+        "main",
+        "food",
+        "car",
+        "evolution",
+        "children",
+        "home",
+        "education",
+        "other",
       ],
       required: [true, "Выберите категорию"],
     },
@@ -32,6 +32,9 @@ const transactionSchema = new Schema(
     amount: {
       type: Number,
       required: [true, "Укажите сумму транзакции"],
+    },
+    balance: {
+      type: Number,
     },
     owner: {
       type: Schema.Types.ObjectId,
