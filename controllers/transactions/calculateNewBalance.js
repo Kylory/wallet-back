@@ -1,15 +1,11 @@
 const calculateNewBalance = (type, amount, balance) => {
-  let newBalance
-
   switch (type) {
     case 'increment':
-      newBalance = balance + amount
-      break
+      return balance + amount
     case 'decrement':
-      newBalance = balance - amount
-      break
+      return balance - amount
     default:
-      break
+      return
   }
 }
 
