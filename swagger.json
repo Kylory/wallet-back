@@ -690,16 +690,16 @@
             {
               "_id": "sa123kjdnjakndjkdsj234",
               "date": "2021-13-10T22:00:00.000Z",
-              "type": "Доход",
-              "category": "Основной",
+              "type": "increment",
+              "category": "main",
               "comment": "Зарплата",
               "amount": 15000
             },
             {
               "_id": "456lfglbfkobjsoivwj213",
               "date": "2021-13-10T22:00:00.000Z",
-              "type": "Расход",
-              "category": "Авто",
+              "type": "decrement",
+              "category": "car",
               "comment": "Топливо",
               "amount": 1500
             }
