@@ -689,7 +689,7 @@
           "ResponseBody": [
             {
               "_id": "sa123kjdnjakndjkdsj234",
-              "date": "2021-13-10T22:00:00.000Z",
+              "date": 1636960453006,
               "type": "increment",
               "category": "main",
               "comment": "Зарплата",
@@ -697,7 +697,7 @@
             },
             {
               "_id": "456lfglbfkobjsoivwj213",
-              "date": "2021-13-10T22:00:00.000Z",
+              "date": 1636960453006,
               "type": "decrement",
               "category": "car",
               "comment": "Топливо",
