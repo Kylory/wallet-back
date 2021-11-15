@@ -547,30 +547,30 @@
         "required": ["date", "type", "category", "amount"],
         "properties": {
           "date": {
-            "type": "Date",
-            "description": "Transaction date",
-            "example": "13.11.2021"
+            "type": "number",
+            "description": "Transaction date (timestamps)",
+            "example": "15654421973878"
           },
           "type": {
             "type": "string",
-            "enum": ["Доход", "Расход"],
+            "enum": ["increment", "decrement"],
             "description": "Transaction type",
-            "example": "Расход"
+            "example": "decrement"
           },
           "category": {
             "type": "string",
             "enum": [
-              "Основной",
-              "Еда",
-              "Авто",
-              "Развитие",
-              "Дети",
-              "Дом",
-              "Образование",
-              "Остальные"
+              "main",
+              "food",
+              "car",
+              "evolution",
+              "children",
+              "home",
+              "education",
+              "other"
             ],
             "description": "Transaction category",
-            "example": "Авто"
+            "example": "car"
           },
           "comment": {
             "type": "string",
@@ -588,8 +588,8 @@
         "type": "object",
         "properties": {
           "date": {
-            "type": "string",
-            "description": "Transaction date"
+            "type": "number",
+            "description": "Transaction date (timestamps)"
           },
           "type": {
             "type": "string",
@@ -612,9 +612,9 @@
           "Status": "201 Created",
           "Content-Type": "application/json",
           "ResponseBody": {
-            "date": "2021-13-10T22:00:00.000Z",
-            "type": "Расход",
-            "category": "Авто",
+            "date": "15654421973878",
+            "type": "decrement",
+            "category": "car",
             "comment": "Топливо",
             "amount": 1500
           }
@@ -665,7 +665,7 @@
                   "type": "string"
                 },
                 "date": {
-                  "type": "string"
+                  "type": "number"
                 },
                 "type": {
                   "type": "string"
@@ -677,6 +677,9 @@
                   "type": "string"
                 },
                 "amount": {
+                  "type": "number"
+                },
+                "balance": {
                   "type": "number"
                 }
               }
@@ -693,7 +696,8 @@
               "type": "increment",
               "category": "main",
               "comment": "Зарплата",
-              "amount": 15000
+              "amount": 15000,
+              "balance": 15000
             },
             {
               "_id": "456lfglbfkobjsoivwj213",
@@ -701,7 +705,8 @@
               "type": "decrement",
               "category": "car",
               "comment": "Топливо",
-              "amount": 1500
+              "amount": 1500,
+              "balance": 13500
             }
           ]
         }
@@ -756,6 +761,12 @@
                 },
                 "other": {
                   "type": "string"
+                },
+                "increment": {
+                  "type": "string"
+                },
+                "decrement": {
+                  "type": "string"
                 }
               }
             }
@@ -772,7 +783,9 @@
             { "children": "Дети" },
             { "home": "Дом" },
             { "education": "Образование" },
-            { "other": "Остальные" }
+            { "other": "Остальные" },
+            { "increment": "Доход" },
+            { "decrement": "Расход" }
           ]
         }
       },
