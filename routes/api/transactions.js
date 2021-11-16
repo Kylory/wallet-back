@@ -1,24 +1,31 @@
-const express = require("express");
-const router = express.Router();
-const { controllerWrapper, authMiddleware } = require("../../middlewares");
+const express = require('express')
+const router = express.Router()
+const { controllerWrapper, authMiddleware } = require('../../middlewares')
 const {
   getAllTransactions,
+  getTransactionsByDate,
   getCategories,
   addTransaction,
   //   updateById,
   //   removeById,
   //   updateStatusById,
-} = require("../../controllers/transactions");
+} = require('../../controllers/transactions')
 // const createTransaction = require("../../controllers/transactions");
 // const getTransactions = require("../../controllers/transactions");
 
 // router.use(authMiddleware)
 
-router.get("/", authMiddleware, controllerWrapper(getAllTransactions));
+router.post(
+  '/getTransactionsByDate',
+  authMiddleware,
+  controllerWrapper(getTransactionsByDate)
+)
 
-router.get("/categories", authMiddleware, controllerWrapper(getCategories));
+router.get('/', authMiddleware, controllerWrapper(getAllTransactions))
 
-router.post("/", authMiddleware, controllerWrapper(addTransaction));
+router.get('/categories', authMiddleware, controllerWrapper(getCategories))
+
+router.post('/', authMiddleware, controllerWrapper(addTransaction))
 
 // router.delete('/:contactId', controllerWrapper(removeById))
 
@@ -26,4 +33,4 @@ router.post("/", authMiddleware, controllerWrapper(addTransaction));
 
 // router.patch('/:contactId/favorite', controllerWrapper(updateStatusById))
 
-module.exports = router;
+module.exports = router

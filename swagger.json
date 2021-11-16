@@ -133,7 +133,7 @@
         }
       }
     },
-    "/api/users/logot": {
+    "/api/users/logout": {
       "post": {
         "tags": ["Users"],
         "summary": "User logout",
