@@ -8,6 +8,7 @@
   "produces": ["application/json"],
   "servers": [
     { "url": "http://localhost:3000" },
+    { "url": "http://localhost:4000" },
     { "url": "https://wallet-back.herokuapp.com" }
   ],
   "tags": [
