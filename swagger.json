@@ -631,6 +631,10 @@
           "amount": {
             "type": "number",
             "description": "Transaction amount"
+          },
+          "balance": {
+            "type": "number",
+            "description": "Balance after transaction"
           }
         },
         "example": {
@@ -641,7 +645,8 @@
             "type": "decrement",
             "category": "car",
             "comment": "Топливо",
-            "amount": 1500
+            "amount": 1500,
+            "balance": 1000
           }
         }
       },
@@ -833,7 +838,7 @@
       },
       "CreateTransactionRequest": {
         "type": "object",
-        "required": ["date", "type", "category", "amount"],
+        "required": ["date", "type", "category", "amount", "balance"],
         "properties": {
           "date": {
             "type": "number",
@@ -870,6 +875,11 @@
             "type": "number",
             "description": "Transaction amount",
             "example": 1500
+          },
+          "balance": {
+            "type": "number",
+            "description": "Transaction amount",
+            "example": 2500
           }
         }
       }
