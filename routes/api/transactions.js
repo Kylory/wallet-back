@@ -15,11 +15,7 @@ const {
 
 // router.use(authMiddleware)
 
-router.post(
-  '/getTransactionsByDate',
-  authMiddleware,
-  controllerWrapper(getTransactionsByDate)
-)
+router.post('/period', authMiddleware, controllerWrapper(getTransactionsByDate))
 
 router.get('/', authMiddleware, controllerWrapper(getAllTransactions))
 

@@ -303,6 +303,57 @@
           }
         }
       }
+    },
+    "/api/transactions/period": {
+      "post": {
+        "tags": ["Transactions"],
+        "summary": "Get transactions by period",
+        "parameters": [],
+        "security": [{ "Bearer": [] }],
+        "requestBody": {
+          "description": "Get transactions by period",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetTransactionsByPeriodRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetTransactionsResponse200"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response400"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateTransactionResponse401"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
 
@@ -542,46 +593,19 @@
           }
         }
       },
-
-      "CreateTransactionRequest": {
+      "GetTransactionsByPeriodRequest": {
         "type": "object",
-        "required": ["date", "type", "category", "amount"],
+        "required": ["year"],
         "properties": {
-          "date": {
+          "year": {
             "type": "number",
-            "description": "Transaction date (timestamps)",
-            "example": "15654421973878"
+            "description": "Transactions period (year)",
+            "example": 2021
           },
-          "type": {
-            "type": "string",
-            "enum": ["increment", "decrement"],
-            "description": "Transaction type",
-            "example": "decrement"
-          },
-          "category": {
-            "type": "string",
-            "enum": [
-              "main",
-              "food",
-              "car",
-              "evolution",
-              "children",
-              "home",
-              "education",
-              "other"
-            ],
-            "description": "Transaction category",
-            "example": "car"
-          },
-          "comment": {
-            "type": "string",
-            "description": "Transaction destination",
-            "example": "Топливо"
-          },
-          "amount": {
+          "month": {
             "type": "number",
-            "description": "Transaction amount",
-            "example": 1500
+            "description": "Transactions period (month)",
+            "example": 9
           }
         }
       },
@@ -646,14 +670,13 @@
           }
         },
         "example": {
-          "Status": "Bad Request",
+          "Status": "401 Unauthorized",
           "Content-Type": "application/json",
           "ResponseBody": {
             "message": "Not authorized"
           }
         }
       },
-
       "GetTransactionsResponse200": {
         "type": "object",
         "properties": {
@@ -723,7 +746,7 @@
           }
         },
         "example": {
-          "Status": "Bad Request",
+          "Status": "401 Unauthorized",
           "Content-Type": "application/json",
           "ResponseBody": {
             "message": "Not authorized"
@@ -801,10 +824,52 @@
           }
         },
         "example": {
-          "Status": "Bad Request",
+          "Status": "401 Unauthorized",
           "Content-Type": "application/json",
           "ResponseBody": {
             "message": "Not authorized"
+          }
+        }
+      },
+      "CreateTransactionRequest": {
+        "type": "object",
+        "required": ["date", "type", "category", "amount"],
+        "properties": {
+          "date": {
+            "type": "number",
+            "description": "Transaction date (timestamps)",
+            "example": "15654421973878"
+          },
+          "type": {
+            "type": "string",
+            "enum": ["increment", "decrement"],
+            "description": "Transaction type",
+            "example": "decrement"
+          },
+          "category": {
+            "type": "string",
+            "enum": [
+              "main",
+              "food",
+              "car",
+              "evolution",
+              "children",
+              "home",
+              "education",
+              "other"
+            ],
+            "description": "Transaction category",
+            "example": "car"
+          },
+          "comment": {
+            "type": "string",
+            "description": "Transaction destination",
+            "example": "Топливо"
+          },
+          "amount": {
+            "type": "number",
+            "description": "Transaction amount",
+            "example": 1500
           }
         }
       }
