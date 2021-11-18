@@ -875,11 +875,6 @@
             "type": "number",
             "description": "Transaction amount",
             "example": 1500
-          },
-          "balance": {
-            "type": "number",
-            "description": "Transaction amount",
-            "example": 2500
           }
         }
       }
