@@ -4,9 +4,9 @@ const Joi = require('joi')
 
 const joiSchema = Joi.object({
   email: Joi.string().required(),
-  password: Joi.string().required(),
-  repeated_password: Joi.string().required(),
-  name: Joi.string().required(),
+  password: Joi.string().min(6).max(12).required(),
+  repeated_password: Joi.string().min(6).max(12).required(),
+  name: Joi.string().min(1).max(12).required(),
 })
 
 const signup = async (req, res) => {
@@ -22,7 +22,8 @@ const signup = async (req, res) => {
     })
     return
   }
-  console.log(req.body)
+
+  // Перевіряємо чи співпадають введені паролі
   if (req.body.password !== req.body.repeated_password) {
     res.status(400).json({
       Status: '400 Bad Request',
@@ -62,6 +63,7 @@ const signup = async (req, res) => {
     ResponseBody: {
       // message: 'Verification link has been sent to you email',
       message: 'New user created',
+      token: result.token,
       user: {
         name: result.name,
         email: result.email,

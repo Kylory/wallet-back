@@ -26,13 +26,17 @@ const loginUser = async ({ email, password }) => {
   )
 
   // Update user token in DB
-  await User.findByIdAndUpdate({ _id: user._id }, { token: token })
+  const UpdatedUser = await User.findByIdAndUpdate(
+    { _id: user._id },
+    { token: token },
+    (options = { returnDocument: 'after' })
+  )
 
   return {
-    token,
+    token: UpdatedUser.token,
     user: {
-      email: user.email,
-      name: user.name,
+      email: UpdatedUser.email,
+      name: UpdatedUser.name,
     },
   }
 }
