@@ -19,7 +19,7 @@ const joiSchema = Joi.object({
       'other'
     )
     .required(),
-//   comment: Joi.string(),
+  comment,
   amount: Joi.number().required(),
   balance: Joi.number(),
 })
