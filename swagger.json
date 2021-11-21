@@ -399,6 +399,11 @@
               "type": "string",
               "description": "User's name",
               "example": "Elon Musk"
+            },
+            "token": {
+              "type": "string",
+              "description": "User's token",
+              "example": "bT2HrEdRoQSQO5rD6GvoGGEZHKhZDtA"
             }
           }
         },
@@ -407,6 +412,7 @@
           "Content-Type": "application/json",
           "ResponseBody": {
             "message": "New user created",
+            "token": "bT2HrEdRoQSQO5rD6GvoGGEZHKhZDtA",
             "user": {
               "name": "Elon Musk",
               "email": "user@example.com"
@@ -493,12 +499,14 @@
           "properties": {
             "token": {
               "type": "string",
-              "description": "User's token"
+              "description": "User's token",
+              "example": "bT2HrEdRoQSQO5rD6GvoGGEZHKhZDtA"
             },
             "email": {
               "type": "string",
               "description": "User's email",
-              "format": "email"
+              "format": "email",
+              "example": "user@example.com"
             },
             "name": {
               "type": "string",
@@ -511,7 +519,7 @@
           "Status": "201 OK",
           "Content-Type": "application/json",
           "ResponseBody": {
-            "token": "token",
+            "token": "bT2HrEdRoQSQO5rD6GvoGGEZHKhZDtA",
             "user": {
               "name": "Elon Musk",
               "email": "user@example.com"
@@ -875,11 +883,6 @@
             "type": "number",
             "description": "Transaction amount",
             "example": 1500
-          },
-          "balance": {
-            "type": "number",
-            "description": "Transaction amount",
-            "example": 2500
           }
         }
       }
