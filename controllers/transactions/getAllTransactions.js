@@ -9,7 +9,7 @@ const getAllTransactions = async (req, res) => {
     res.status(200).json({
       Status: "200 OK",
       "Content-Type": "application/json",
-      ResponseBody: { allTransactions },
+      ResponseBody: [],
     });
 
     return;
