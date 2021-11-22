@@ -16,7 +16,9 @@ const joiSchema = Joi.object({
       'children',
       'home',
       'education',
-      'other'
+      'other',
+      "regularIncome",
+      "irregularIncome",
     )
     .required(),
   comment: Joi.string(),
