@@ -24,14 +24,6 @@ const userSchema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
-  // verify: {
-  //   type: Boolean,
-  //   default: false,
-  // },
-  // verifyToken: {
-  //   type: String,
-  //   required: [true, 'Verify token is required'],
-  // },
 })
 
 const User = mongoose.model('User', userSchema)

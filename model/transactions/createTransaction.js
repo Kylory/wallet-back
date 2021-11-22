@@ -1,4 +1,4 @@
-const { Transaction } = require("../../db/transactionModel");
+const { Transaction } = require('../../db/transactionModel')
 
 const createTransaction = async (
   { date, type, category, comment, amount },
@@ -13,9 +13,7 @@ const createTransaction = async (
     amount,
     balance,
     owner: _id,
-  });
+  })
+}
 
-  // const updateBalance = User.findByIdAndUpdate(req.body);
-};
-
-module.exports = createTransaction;
+module.exports = createTransaction
