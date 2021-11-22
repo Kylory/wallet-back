@@ -23,6 +23,8 @@ const transactionSchema = new Schema(
         "home",
         "education",
         "other",
+        "regularIncome",
+        "irregularIncome",
       ],
       required: [true, "Выберите категорию"],
     },
